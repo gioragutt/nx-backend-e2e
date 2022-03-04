@@ -10,7 +10,7 @@ export class TodosService {
   constructor(@InjectModel(Todo.name) private todo: Model<Todo>) {}
 
   async create({ title }: CreateTodoDto) {
-    await this.todo.create({
+    return await this.todo.create({
       title,
       completed: false,
       createdAt: new Date(),
@@ -34,15 +34,17 @@ export class TodosService {
     const updated = await this.todo.findByIdAndUpdate(
       id,
       { $set: { ...updateTodoDto, updatedAt: new Date() } },
-      { upsert: false },
+      { upsert: false, returnOriginal: false },
     );
 
     if (!updated) {
       throw new NotFoundException();
     }
+
+    return updated;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} todo`;
+  async remove(id: string) {
+    await this.todo.findByIdAndRemove(id);
   }
 }
