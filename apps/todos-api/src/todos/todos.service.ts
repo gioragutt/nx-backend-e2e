@@ -7,10 +7,10 @@ import { Todo } from './entities/todo.entity';
 
 @Injectable()
 export class TodosService {
-  constructor(@InjectModel(Todo.name) private todo: Model<Todo>) {}
+  constructor(@InjectModel(Todo.name) private todos: Model<Todo>) {}
 
   async create({ title }: CreateTodoDto) {
-    return await this.todo.create({
+    return await this.todos.create({
       title,
       completed: false,
       createdAt: new Date(),
@@ -19,11 +19,11 @@ export class TodosService {
   }
 
   async findAll(): Promise<Todo[]> {
-    return await this.todo.find();
+    return await this.todos.find();
   }
 
   async findOne(id: string): Promise<Todo> {
-    const todo = await this.todo.findById(id);
+    const todo = await this.todos.findById(id);
     if (!todo) {
       throw new NotFoundException();
     }
@@ -31,7 +31,7 @@ export class TodosService {
   }
 
   async update(id: string, updateTodoDto: UpdateTodoDto) {
-    const updated = await this.todo.findByIdAndUpdate(
+    const updated = await this.todos.findByIdAndUpdate(
       id,
       { $set: { ...updateTodoDto, updatedAt: new Date() } },
       { upsert: false, returnOriginal: false },
@@ -45,6 +45,6 @@ export class TodosService {
   }
 
   async remove(id: string) {
-    await this.todo.findByIdAndRemove(id);
+    await this.todos.findByIdAndRemove(id);
   }
 }
