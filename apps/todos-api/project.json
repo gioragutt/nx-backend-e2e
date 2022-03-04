@@ -10,11 +10,22 @@
         "outputPath": "dist/apps/todos-api",
         "main": "apps/todos-api/src/main.ts",
         "tsConfig": "apps/todos-api/tsconfig.app.json",
-        "assets": ["apps/todos-api/src/assets"]
+        "assets": ["apps/todos-api/src/assets"],
+        "generatePackageJson": true,
+        "tsPlugins": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "introspectComments": true
+            }
+          }
+        ]
       },
       "configurations": {
         "production": {
-          "optimization": true,
+          "//1": "optimization set to false for swagger class names.",
+          "//2": "If you find a way to disable just class name shortening, do that",
+          "optimization": false,
           "extractLicenses": true,
           "inspect": false,
           "fileReplacements": [
