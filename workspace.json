@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "api-utils": "libs/api-utils",
+    "tags-api": "apps/tags-api",
     "todos-api": "apps/todos-api"
   }
 }

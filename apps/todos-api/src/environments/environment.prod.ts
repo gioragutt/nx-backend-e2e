@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  mongoUri: 'mongo:27017',
+  mongoUri: process.env.MONGO_URI,
+  tagsApi: process.env.TAGS_API,
 };

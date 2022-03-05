@@ -14,10 +14,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   setupSwagger(app, {
-    document: new DocumentBuilder().setTitle('Todos API').setVersion('1.0'),
+    document: new DocumentBuilder().setTitle('Tags API').setVersion('1.0'),
   });
 
-  const port = process.env.PORT || 3333;
+  const port = process.env.PORT || 3334;
   await app.listen(port);
   Logger.log(`🚀 Application is running on: http://localhost:${port}/swagger`);
 }

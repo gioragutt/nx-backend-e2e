@@ -1,0 +1,60 @@
+{
+  "root": "apps/tags-api",
+  "sourceRoot": "apps/tags-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/tags-api",
+        "main": "apps/tags-api/src/main.ts",
+        "tsConfig": "apps/tags-api/tsconfig.app.json",
+        "assets": ["apps/tags-api/src/assets"],
+        "tsPlugins": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "introspectComments": true
+            }
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/tags-api/src/environments/environment.ts",
+              "with": "apps/tags-api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "tags-api:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/tags-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/tags-api"],
+      "options": {
+        "jestConfig": "apps/tags-api/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
