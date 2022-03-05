@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "soluto-e2e",
+  "version": "0.0.1",
+  "generators": {
+    "soluto-e2e": {
+      "factory": "./src/generators/soluto-e2e/generator",
+      "schema": "./src/generators/soluto-e2e/schema.json",
+      "description": "soluto-e2e generator"
+    }
+  }
+}

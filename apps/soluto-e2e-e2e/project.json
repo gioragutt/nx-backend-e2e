@@ -1,0 +1,16 @@
+{
+  "root": "apps/soluto-e2e-e2e",
+  "projectType": "application",
+  "sourceRoot": "apps/soluto-e2e-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "soluto-e2e:build",
+        "jestConfig": "apps/soluto-e2e-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["soluto-e2e"]
+}

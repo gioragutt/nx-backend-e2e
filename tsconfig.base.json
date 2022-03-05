@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@backend-e2e/api-utils": ["libs/api-utils/src/index.ts"]
+      "@backend-e2e/api-utils": ["libs/api-utils/src/index.ts"],
+      "@backend-e2e/soluto-e2e": ["libs/soluto-e2e/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

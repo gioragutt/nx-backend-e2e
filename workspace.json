@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "api-utils": "libs/api-utils",
+    "soluto-e2e": "libs/soluto-e2e",
+    "soluto-e2e-e2e": "apps/soluto-e2e-e2e",
     "tags-api": "apps/tags-api",
     "todos-api": "apps/todos-api"
   }
