@@ -1,0 +1,52 @@
+{
+  "root": "apps/todos-api-e2e",
+  "sourceRoot": "apps/todos-api-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/todos-api-e2e",
+        "main": "apps/todos-api-e2e/src/main.ts",
+        "tsConfig": "apps/todos-api-e2e/tsconfig.app.json",
+        "assets": ["apps/todos-api-e2e/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/todos-api-e2e/src/environments/environment.ts",
+              "with": "apps/todos-api-e2e/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "todos-api-e2e:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/todos-api-e2e/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/todos-api-e2e"],
+      "options": {
+        "jestConfig": "apps/todos-api-e2e/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
