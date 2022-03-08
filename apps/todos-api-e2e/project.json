@@ -3,35 +3,6 @@
   "sourceRoot": "apps/todos-api-e2e/src",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/todos-api-e2e",
-        "main": "apps/todos-api-e2e/src/main.ts",
-        "tsConfig": "apps/todos-api-e2e/tsconfig.app.json",
-        "assets": ["apps/todos-api-e2e/src/assets"]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/todos-api-e2e/src/environments/environment.ts",
-              "with": "apps/todos-api-e2e/src/environments/environment.prod.ts"
-            }
-          ]
-        }
-      }
-    },
-    "serve": {
-      "executor": "@nrwl/node:execute",
-      "options": {
-        "buildTarget": "todos-api-e2e:build"
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
@@ -45,6 +16,27 @@
       "options": {
         "jestConfig": "apps/todos-api-e2e/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "e2e": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx dc-up todos-api-e2e", "nx test todos-api-e2e", "nx dc-down todos-api-e2e"],
+        "parallel": false
+      }
+    },
+    "dc-up": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker-compose build && docker-compose up -d",
+        "cwd": "apps/todos-api-e2e"
+      }
+    },
+    "dc-down": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker-compose down --remove-orphans",
+        "cwd": "apps/todos-api-e2e"
       }
     }
   },

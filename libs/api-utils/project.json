@@ -4,14 +4,13 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/node:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/api-utils",
         "tsConfig": "libs/api-utils/tsconfig.lib.json",
         "packageJson": "libs/api-utils/package.json",
-        "main": "libs/api-utils/src/index.ts",
-        "assets": ["libs/api-utils/*.md"]
+        "main": "libs/api-utils/src/index.ts"
       }
     },
     "lint": {
