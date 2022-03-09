@@ -1,4 +1,4 @@
-describe('test <%= projectName %>', () => {
+describe('test <%= project %>', () => {
   it('should work', () => {
     expect(1).toBe(1);
   });

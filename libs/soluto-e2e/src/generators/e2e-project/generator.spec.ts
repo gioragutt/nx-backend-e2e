@@ -6,7 +6,7 @@ import { E2eProjectGeneratorSchema } from './schema';
 
 describe('e2e-project generator', () => {
   let appTree: Tree;
-  const options: E2eProjectGeneratorSchema = { name: 'test' };
+  const options: E2eProjectGeneratorSchema = { name: 'test', project: 'app-name' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
@@ -16,5 +16,5 @@ describe('e2e-project generator', () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();
-  })
+  });
 });

@@ -12,7 +12,7 @@
         "$source": "projectName"
       },
       "alias": "p",
-      "x-prompt": "What Nest project would you like to target?"
+      "x-prompt": "What backend app would you like to test?"
     },
     "name": {
       "type": "string",

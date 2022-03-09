@@ -1,5 +1,5 @@
 import {
-  addProjectConfiguration,
+  updateProjectConfiguration,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -99,7 +99,7 @@ export default async function (tree: Tree, options: E2eProjectGeneratorSchema) {
 
   const projectConfig = createE2EProjectConfig(tree, normalizedOptions);
 
-  addProjectConfiguration(tree, normalizedOptions.projectName, projectConfig);
+  updateProjectConfiguration(tree, normalizedOptions.projectName, projectConfig);
 
   tree.delete(projectConfig.sourceRoot);
 
