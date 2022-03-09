@@ -1,17 +1,22 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "$id": "SolutoE2e",
+  "$id": "E2eProject",
   "title": "",
   "type": "object",
   "properties": {
+    "project": {
+      "description": "The name of the backend project to test.",
+      "type": "string",
+      "$default": {
+        "$source": "projectName"
+      },
+      "alias": "p",
+      "x-prompt": "What Nest project would you like to target?"
+    },
     "name": {
       "type": "string",
-      "description": "",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
+      "description": "Name of the E2E Project (default - `${projectName}-e2e`",
       "x-prompt": "What name would you like to use?"
     },
     "tags": {
@@ -25,5 +30,5 @@
       "alias": "d"
     }
   },
-  "required": ["name"]
+  "required": ["project"]
 }

@@ -1,0 +1,8 @@
+version: '3.9'
+services:
+  <%= projectName %>:
+    build:
+      context: ../..
+      dockerfile: apps/<%= projectName %>/Dockerfile
+      args:
+        APP_NAME: <%= projectName %>

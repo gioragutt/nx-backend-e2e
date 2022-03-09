@@ -3,10 +3,10 @@
   "name": "soluto-e2e",
   "version": "0.0.1",
   "generators": {
-    "soluto-e2e": {
-      "factory": "./src/generators/soluto-e2e/generator",
-      "schema": "./src/generators/soluto-e2e/schema.json",
-      "description": "soluto-e2e generator"
+    "e2e-project": {
+      "factory": "./src/generators/e2e-project/generator",
+      "schema": "./src/generators/e2e-project/schema.json",
+      "description": "Generate an E2E project for a a backend app"
     }
   }
 }
