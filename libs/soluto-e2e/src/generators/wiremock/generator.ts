@@ -6,7 +6,11 @@ import {
 } from '@nrwl/devkit';
 import { join } from 'path';
 import { DOCKER_COMPOSE_YAML, WIREMOCK_SERVICE_NAME } from '../../utils/constants';
-import { addDependsOnToService, findServiceOfTestedProject } from '../../utils/docker-compose';
+import {
+  addDependsOnToService,
+  addService,
+  findServiceOfTestedProject,
+} from '../../utils/docker-compose';
 import { wiremockRestClientVersion } from '../../utils/versions';
 import { updateYaml } from '../../utils/yaml';
 import { WiremockGeneratorSchema } from './schema';
@@ -16,10 +20,12 @@ export default async function (tree: Tree, options: WiremockGeneratorSchema) {
 
   updateYaml(tree, join(projectConfig.root, DOCKER_COMPOSE_YAML), yaml => {
     addDependsOnToService(findServiceOfTestedProject(yaml), WIREMOCK_SERVICE_NAME);
-    yaml.services[WIREMOCK_SERVICE_NAME] = {
+
+    addService(yaml, WIREMOCK_SERVICE_NAME, {
       image: 'wiremock/wiremock',
       ports: ['8080:8080'],
-    };
+    });
+
     return yaml;
   });
 

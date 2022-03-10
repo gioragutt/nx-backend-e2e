@@ -8,5 +8,14 @@ export function findServiceOfTestedProject(dockerCompose: any): any {
 
 export function addDependsOnToService(service: any, dependencyName: string): void {
   service.depends_on ||= [];
-  service.depends_on.push(dependencyName);
+
+  if (!service.depends_on.includes(dependencyName)) {
+    service.depends_on.push(dependencyName);
+  }
+}
+
+export function addService(dockerCompose: any, serviceName: string, definition: any): void {
+  if (dockerCompose.services[serviceName]) {
+    dockerCompose.services[serviceName] = definition;
+  }
 }
