@@ -8,7 +8,7 @@ import { join } from 'path';
 import { DOCKER_COMPOSE_YAML, WIREMOCK_SERVICE_NAME } from '../../utils/constants';
 import {
   addDependsOnToService,
-  addService,
+  addServiceFromDefinitionFile,
   findServiceOfTestedProject,
 } from '../../utils/docker-compose';
 import { wiremockRestClientVersion } from '../../utils/versions';
@@ -21,10 +21,11 @@ export default async function (tree: Tree, options: WiremockGeneratorSchema) {
   updateYaml(tree, join(projectConfig.root, DOCKER_COMPOSE_YAML), yaml => {
     addDependsOnToService(findServiceOfTestedProject(yaml), WIREMOCK_SERVICE_NAME);
 
-    addService(yaml, WIREMOCK_SERVICE_NAME, {
-      image: 'wiremock/wiremock',
-      ports: ['8080:8080'],
-    });
+    addServiceFromDefinitionFile(
+      yaml,
+      WIREMOCK_SERVICE_NAME,
+      join(__dirname, 'files', 'wiremock-service.yaml'),
+    );
 
     return yaml;
   });

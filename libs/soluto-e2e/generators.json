@@ -12,6 +12,11 @@
       "factory": "./src/generators/wiremock/generator",
       "schema": "./src/generators/wiremock/schema.json",
       "description": "Generate wiremock boilerplate to the backend e2e project"
+    },
+    "oidc-server-mock": {
+      "factory": "./src/generators/oidc-server-mock/generator",
+      "schema": "./src/generators/oidc-server-mock/schema.json",
+      "description": "Generate oidc-server-mock boilerplate to the backend e2e project"
     }
   }
 }
