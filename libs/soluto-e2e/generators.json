@@ -7,6 +7,11 @@
       "factory": "./src/generators/e2e-project/generator",
       "schema": "./src/generators/e2e-project/schema.json",
       "description": "Generate an E2E project for a a backend app"
+    },
+    "wiremock": {
+      "factory": "./src/generators/wiremock/generator",
+      "schema": "./src/generators/wiremock/schema.json",
+      "description": "Generate wiremock boilerplate to the backend e2e project"
     }
   }
 }

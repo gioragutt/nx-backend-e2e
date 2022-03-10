@@ -20,7 +20,6 @@ services:
       - 8080:8080
 
   oidc-server-mock:
-    container_name: oidc-server-mock
     image: ghcr.io/soluto/oidc-server-mock:latest
     environment:
       ASPNETCORE_ENVIRONMENT: Development
