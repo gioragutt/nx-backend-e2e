@@ -15,7 +15,7 @@ export function addDependsOnToService(service: any, dependencyName: string): voi
 }
 
 export function addService(dockerCompose: any, serviceName: string, definition: any): void {
-  if (dockerCompose.services[serviceName]) {
+  if (!dockerCompose.services[serviceName]) {
     dockerCompose.services[serviceName] = definition;
   }
 }
