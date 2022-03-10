@@ -1,5 +1,4 @@
 import {
-  updateProjectConfiguration,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -8,9 +7,12 @@ import {
   ProjectConfiguration,
   readProjectConfiguration,
   Tree,
+  updateProjectConfiguration,
 } from '@nrwl/devkit';
 import { applicationGenerator } from '@nrwl/node';
 import * as path from 'path';
+import { oidcServerMockGenerator } from '../oidc-server-mock/generator';
+import { wiremockGenerator } from '../wiremock/generator';
 import { E2eProjectGeneratorSchema } from './schema';
 
 interface NormalizedSchema extends E2eProjectGeneratorSchema {
@@ -92,7 +94,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
 }
 
-export default async function (tree: Tree, options: E2eProjectGeneratorSchema) {
+export async function e2eProjectGenerator(tree: Tree, options: E2eProjectGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
 
   const installDeps = await applicationGenerator(tree, normalizedOptions);
@@ -106,5 +108,15 @@ export default async function (tree: Tree, options: E2eProjectGeneratorSchema) {
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
 
+  if (options.wiremock) {
+    await wiremockGenerator(tree, { project: normalizedOptions.projectName });
+  }
+
+  if (options.oidcServerMock) {
+    await oidcServerMockGenerator(tree, { project: normalizedOptions.projectName });
+  }
+
   return () => installDeps();
 }
+
+export default e2eProjectGenerator;

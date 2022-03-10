@@ -15,7 +15,7 @@ import { wiremockRestClientVersion } from '../../utils/versions';
 import { updateYaml } from '../../utils/yaml';
 import { WiremockGeneratorSchema } from './schema';
 
-export default async function (tree: Tree, options: WiremockGeneratorSchema) {
+export async function wiremockGenerator(tree: Tree, options: WiremockGeneratorSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);
 
   updateYaml(tree, join(projectConfig.root, DOCKER_COMPOSE_YAML), yaml => {
@@ -40,3 +40,5 @@ export default async function (tree: Tree, options: WiremockGeneratorSchema) {
 
   return () => installDeps();
 }
+
+export default wiremockGenerator;

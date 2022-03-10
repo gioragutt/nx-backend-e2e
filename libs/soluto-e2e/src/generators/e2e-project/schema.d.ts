@@ -3,4 +3,6 @@ export interface E2eProjectGeneratorSchema {
   project: string;
   tags?: string;
   directory?: string;
+  wiremock?: boolean;
+  oidcServerMock?: boolean;
 }
