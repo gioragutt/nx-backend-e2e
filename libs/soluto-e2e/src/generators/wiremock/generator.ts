@@ -25,6 +25,7 @@ export async function wiremockGenerator(tree: Tree, options: WiremockGeneratorSc
       yaml,
       WIREMOCK_SERVICE_NAME,
       join(__dirname, 'files', 'wiremock-service.yaml'),
+      {},
     );
 
     return yaml;

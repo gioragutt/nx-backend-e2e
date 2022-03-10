@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { readFileSync } from 'fs';
-import { load, dump, LoadOptions, DumpOptions } from 'js-yaml';
+import { load, LoadOptions } from 'js-yaml';
+import * as ejs from 'ejs';
+
+export function getTestedProjectNameFromService(service: any): string | undefined {
+  return service.build?.args?.APP_NAME;
+}
 
 export function findServiceOfTestedProject(dockerCompose: any): any {
   return Object.values(dockerCompose.services).find(
-    (service: any) => service.build?.args?.APP_NAME,
+    (service: any) => !!getTestedProjectNameFromService(service),
   );
 }
 
@@ -26,8 +31,11 @@ export function addServiceFromDefinitionFile(
   dockerCompose: any,
   serviceName: string,
   definitionFilePath: string,
+  templateVariables: object,
   loadOptions?: LoadOptions,
 ): void {
-  const definition = load(readFileSync(definitionFilePath, 'utf-8'), loadOptions);
+  const definitionFileTemplate = readFileSync(definitionFilePath, 'utf-8');
+  const renderedDefinitionFile = ejs.render(definitionFileTemplate, templateVariables);
+  const definition = load(renderedDefinitionFile, loadOptions);
   addService(dockerCompose, serviceName, definition);
 }
