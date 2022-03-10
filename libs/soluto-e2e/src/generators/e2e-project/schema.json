@@ -16,8 +16,7 @@
     },
     "name": {
       "type": "string",
-      "description": "Name of the E2E Project (default - `${projectName}-e2e`",
-      "x-prompt": "What name would you like to use?"
+      "description": "Name of the E2E Project (default - `${projectName}-e2e`)"
     },
     "tags": {
       "type": "string",
