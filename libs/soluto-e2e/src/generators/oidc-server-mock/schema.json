@@ -17,5 +17,5 @@
       }
     }
   },
-  "required": ["name"]
+  "required": ["project"]
 }
