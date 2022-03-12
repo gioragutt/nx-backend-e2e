@@ -11,6 +11,7 @@ import {
 } from '@nrwl/devkit';
 import { applicationGenerator } from '@nrwl/node';
 import * as path from 'path';
+import { ensureProjectExists } from '../../utils/nx';
 import { oidcServerMockGenerator } from '../oidc-server-mock/generator';
 import { wiremockGenerator } from '../wiremock/generator';
 import { E2eProjectGeneratorSchema } from './schema';
@@ -58,25 +59,25 @@ function createE2EProjectConfig(
       executor: '@nrwl/workspace:run-commands',
       options: {
         commands: [
-          `nx dc-up ${normalizedOptions.projectName}`,
+          `nx up ${normalizedOptions.projectName}`,
           `nx test ${normalizedOptions.projectName}`,
-          `nx dc-down ${normalizedOptions.projectName}`,
+          `nx down ${normalizedOptions.projectName}`,
         ],
         parallel: false,
       },
     },
-    'dc-up': {
+    up: {
       executor: '@nrwl/workspace:run-commands',
       options: {
         command: 'docker-compose build && docker-compose up -d',
-        cwd: `apps/${normalizedOptions.projectName}`,
+        cwd: normalizedOptions.projectRoot,
       },
     },
-    'dc-down': {
+    down: {
       executor: '@nrwl/workspace:run-commands',
       options: {
         command: 'docker-compose down --remove-orphans',
-        cwd: `apps/${normalizedOptions.projectName}`,
+        cwd: normalizedOptions.projectRoot,
       },
     },
   });
@@ -97,7 +98,12 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
 export async function e2eProjectGenerator(tree: Tree, options: E2eProjectGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
 
-  const installDeps = await applicationGenerator(tree, normalizedOptions);
+  ensureProjectExists(tree, options.project);
+
+  const installDeps = await applicationGenerator(tree, {
+    standaloneConfig: true,
+    ...normalizedOptions,
+  });
 
   const projectConfig = createE2EProjectConfig(tree, normalizedOptions);
 

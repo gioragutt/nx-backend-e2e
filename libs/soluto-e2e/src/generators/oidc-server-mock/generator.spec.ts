@@ -6,7 +6,7 @@ import { OidcServerMockGeneratorSchema } from './schema';
 
 describe('oidc-server-mock generator', () => {
   let appTree: Tree;
-  const options: OidcServerMockGeneratorSchema = { name: 'test' };
+  const options: OidcServerMockGeneratorSchema = { project: 'test' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
@@ -16,5 +16,5 @@ describe('oidc-server-mock generator', () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();
-  })
+  });
 });
