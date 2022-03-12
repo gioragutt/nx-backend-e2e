@@ -2,6 +2,7 @@ import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { applicationGenerator } from '@nrwl/node';
 import * as path from 'path';
+import { DOCKER_COMPOSE_YAML } from '../../utils/constants';
 import { readYaml } from '../../utils/yaml';
 import { e2eProjectGenerator } from './generator';
 import { E2eProjectGeneratorSchema } from './schema';
@@ -34,13 +35,13 @@ describe('e2e-project generator', () => {
     expect(config).toBeDefined();
   });
 
-  it('should create a docker-compose.yaml file', async () => {
+  it('should create a docker-compose file', async () => {
     await createProject();
 
     const { root: e2eRoot } = readProjectConfiguration(tree, e2eProject);
     const { root: appRoot } = readProjectConfiguration(tree, project);
 
-    const dockerCompose = readYaml(tree, path.join(e2eRoot, 'docker-compose.yaml'));
+    const dockerCompose = readYaml(tree, path.join(e2eRoot, DOCKER_COMPOSE_YAML));
 
     expect(dockerCompose).toMatchObject({
       services: {
