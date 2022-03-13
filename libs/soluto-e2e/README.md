@@ -9,6 +9,11 @@ Run `nx build soluto-e2e` to build the library.
 # Manual Usage
 
 First, build the library as described above.
+The generated project is an altered `@nrwl/node:application` that is stripped of the `build` & `serve` targets,
+But added the following targets:
+* `up` - runs a command to set-up dependencies, currently it's using `docker-compose` but we can update it to use tilt or whatever command we want.
+* `down` - runs a command to tear-down dependencies.
+* `e2e` - runs `nx up <project>`, `nx test <project>` and `nx down <project>` sequentially.
 
 ## Creating an E2E Project
 
