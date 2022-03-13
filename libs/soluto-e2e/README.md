@@ -15,6 +15,8 @@ But added the following targets:
 * `down` - runs a command to tear-down dependencies.
 * `e2e` - runs `nx up <project>`, `nx test <project>` and `nx down <project>` sequentially.
 
+So after generating a project (described below), you can run `nx e2e <e2e project name>` and it should _Just Work™_.
+
 ## Creating an E2E Project
 
 ```bash
@@ -65,7 +67,9 @@ yarn nx generate ./dist/libs/soluto-e2e:wiremock --project=test-e2e-app
 
 ## Adding `oidc-server-mock` support to existing e2e projects
 
+```bash
 yarn nx generate ./dist/libs/soluto-e2e:oidc-server-mock --project=test-e2e-app
+```
 
 ## Running unit tests
 
