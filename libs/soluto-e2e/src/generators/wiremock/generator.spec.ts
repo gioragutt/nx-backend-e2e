@@ -11,7 +11,7 @@ import { wiremockGenerator } from './generator';
 const project = 'backend-project';
 const e2eProject = `${project}-e2e`;
 
-xdescribe('wiremock generator', () => {
+describe('wiremock generator', () => {
   let tree: Tree;
 
   beforeEach(async () => {
